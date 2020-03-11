@@ -1,17 +1,7 @@
-spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/oauth
-    username: root
-    password: root
-
-#mybatis:
-#  configuration:
-#    #配置项：开启下划线到驼峰的自动转换. 作用：将数据库字段根据驼峰规则自动注入到对象属性。
-#    map-underscore-to-camel-case: true
-
-weixin:
-  appid: wxb92e4c8bab293927
-  secret: f902646958524ce5c21a08e6db575c76
-  grant_type: authorization_code
+#配置apollo属性
+app:
+  id: oauth
+apollo:
+  bootstrap:
+    namespaces: application,weixin
+    enabled: true

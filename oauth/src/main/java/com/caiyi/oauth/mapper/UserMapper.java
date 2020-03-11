@@ -16,21 +16,42 @@ public interface UserMapper {
     })
     List<UserInfo> getAll();
 
-    @Select("select * from oauth.userinfo where userid=#{userid}")
-    UserInfo getByUserId(String userid);
+    @Select("select * from oauth.userinfo where userid=#{userid} and yxbz=#{yxbz}")
+    UserInfo getByUserId(String userid, String yxbz);
 
-    @Insert({"insert into oauth.userinfo(userid) values(#{userid})"})
-    void addUser(String userid);
+    @Select("select * from oauth.userinfo where openid=#{openid} and yxbz=#{yxbz}")
+    UserInfo getByOpenId(String openid, String yxbz);
 
-    @Update({"update oauth.userinfo set token=#{token}, expired_time=#{expired_time} where userid=#{userid}"})
-    void UpdateToken(String userid, String token, Date expired_time);
+    @Insert({"insert into oauth.userinfo(userid,username,yxbz) values(#{userid},#{username},'1')"})
+    void addUser(String userid, String username);
 
     @Update({"update oauth.userinfo set openid=#{openid} where userid=#{userid}"})
     void UpdateOpenid(String userid, String openid);
 
-    @Update({"update oauth.userinfo set session_key=#{session_key} where userid=#{userid}"})
-    void UpdateSessionKey(String userid, String session_key);
+    @Update({"update oauth.userinfo set gen=#{gen} where userid=#{userid}"})
+    void UpdateGen(int gen, String userid);
 
-    @Delete("delete from oauth.userinfo where userid=#{userid}")
+    @Update({"update oauth.userinfo set country=#{country} where userid=#{userid}"})
+    void UpdateCountry(String country, String userid);
+
+    @Update({"update oauth.userinfo set province=#{province} where userid=#{userid}"})
+    void UpdateProvince(String province, String userid);
+
+    @Update({"update oauth.userinfo set city=#{city} where userid=#{userid}"})
+    void UpdateCity(String city, String userid);
+
+    @Update({"update oauth.userinfo set birthday=#{birthday} where userid=#{userid}"})
+    void UpdateBirthday(Date birthday, String userid);
+
+    @Update({"update oauth.userinfo set username=#{username} where userid=#{userid}"})
+    void UpdateUserName(String username, String userid);
+
+    @Update({"update oauth.userinfo set email=#{email} where userid=#{userid}"})
+    void UpdateEmail(String email, String userid);
+
+    @Update({"update oauth.userinfo set avatarurl=#{avatarUrl} where userid=#{userid}"})
+    void UpdateAvatarUrl(String avatarUrl, String userid);
+
+    @Delete("update oauth.userinfo set yxbz='0' where userid=#{userid}")
     void delete(String userid);
 }

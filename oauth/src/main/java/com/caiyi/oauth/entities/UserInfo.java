@@ -1,51 +1,45 @@
 package com.caiyi.oauth.entities;
 
+import com.alibaba.fastjson.JSONObject;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Slf4j
+public class UserInfo implements Serializable {
     private String userid;
     private String openid;
-    private String token;
-    private Date expired_time;
-    private String session_key;
+    private String gen;
+    private String country;
+    private String province;
+    private String city;
+    private String password;
+    private Date birthday;
+    private String username;
+    private String email;
+    private String avatarUrl;
+    private AccessToken accessToken;
 
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Date getExpired_time() {
-        return expired_time;
-    }
-
-    public void setExpired_time(Date expired_time) {
-        this.expired_time = expired_time;
-    }
-
-    public String getSession_key() {
-        return session_key;
-    }
-
-    public void setSession_key(String session_key) {
-        this.session_key = session_key;
+    public JSONObject toJSON() {
+        JSONObject res = new JSONObject();
+        res.put("userid", this.userid);
+        res.put("openid", this.openid);
+        res.put("gen", this.gen);
+        res.put("country", this.country);
+        res.put("province", this.province);
+        res.put("city", this.city);
+        res.put("password", this.password);
+        res.put("birthday", this.birthday);
+        res.put("username", this.username);
+        res.put("email", this.email);
+        res.put("avatarUrl", this.avatarUrl);
+        return res;
     }
 }
